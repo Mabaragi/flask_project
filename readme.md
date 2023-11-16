@@ -1,4 +1,7 @@
 # Flask
+export FLASK_APP=pybo
+export FLASK_DEBUG=true
+
 
 ***WSGI Application***
 - Web Server Gateway Interface 애플리케이션
@@ -43,3 +46,21 @@
 **uri 보안**
 - python-dotenv 패키지 활용
 - 루트 디렉토리에 `.env` 파일 생성하고 URI를 포함시키면됨. .gitignore에 작성.
+  
+**Flask Shell**
+`flask shell`
+
+### 문서 지향적 데이터 모델링
+- MongoDB는 BSON 형식을 사용하며 document 형태로 저장. 각 문서는 키-값 쌍을 가지고, 다른 문서를 임베딩 할 수 있음.
+- MongoDB는 스키마가 고정되어 있지 않음(Flexible Schema)
+**임베딩 vs 참조**
+- 임베딩 : join이 필요없어 조회에서 유리하지만, 중복 데이터 관리가 어려워짐
+- 참조 : RDBMS의 외래키와 유사한 방식으로 작동. 데이터 검색에서 불리함.
+
+**애플리케이션 수준에서의 데이터 모델링**
+- MongoDB는 스키마가 없지만, 애플리케이션 수준에서 데이터 구조를 하는게 유용할 수 있다.
+- 일반적으로 NoSQL 데이터베이스를 사용하더라도 애플리케이션 수준에서 데이터구조를 정의하는 경우가 많다. 그 이유는 다음과 같다.
+  - 데이터 무결성, 유효성 검증
+  - 가독성, 유지보수
+  - 비즈니스 로직
+  - 데이터 접근 방법 표준화, 쿼리 최적화
