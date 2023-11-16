@@ -9,9 +9,15 @@ def create_app():
     app = Flask(__name__)
     my_mongo_uri = os.getenv('MY_MONGO_URI')
     client = MongoClient(my_mongo_uri)
-    # appÀÎ½ºÅÏ½ºÀÇ ¼Ó¼ºÀ¸·Î db¸¦ ÀúÀå, ´Ù¸¥ ¸ğµâ¿¡¼­ current_app.db·Î Á¢±Ù
+    # appì¸ìŠ¤í„´ìŠ¤ì˜ ì†ì„±ìœ¼ë¡œ dbë¥¼ ì €ì¥, ë‹¤ë¥¸ ëª¨ë“ˆì—ì„œ current_app.dbë¡œ ì ‘ê·¼
     app.db = client.temp
 
     from .views import main_views
     app.register_blueprint(main_views.bp)
+
+    # Flask Shell ì»¨í…ìŠ¤íŠ¸ ì„¤ì •
+    @app.shell_context_processor
+    def make_shell_context():
+        return {'app': app, 'db': app.db}
+
     return app
