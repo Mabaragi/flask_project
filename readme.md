@@ -28,10 +28,17 @@
 # MongoDB
 1. Flask-PyMongo 라이브러리 설치
 2. `__init__.py` 파일의 `create_app` 함수에 Mongo DB 설정
-   ```
-   
+   ```python
+   from pymongo import MongoClient
+
+   my_mongo_uri = os.getenv('MY_MONGO_URI')
+   client = MongoClient(my_mongo_uri)
+   # app인스턴스의 속성으로 db를 저장, 다른 모듈에서 current_app.db로 접근
+   app.db = client.temp
+
    ```
 3. 다른 곳에서 mongo를 참조하려면, `current_app ` 을 임포트해서 사용
+    - `current_app.db` 로 접근하여 mongo db 사용
 
 **uri 보안**
 - python-dotenv 패키지 활용
